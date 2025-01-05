@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 function Users() {
     const [users, setUsers] = useState([])
-    const [error,setError] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -12,7 +12,7 @@ function Users() {
                 const json = await res.json()
                 setUsers(json)
             } catch (error) {
-              setError(true)
+                setError(true)
 
             }
         }
