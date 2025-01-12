@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import Counter from './Counter'
 
 function Users() {
     const [users, setUsers] = useState([])
@@ -23,19 +24,20 @@ function Users() {
 
     const searchHandler = async () => {
         const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        const json =await res.json()
-       console.log(json);
-       
+        const json = await res.json()
+        console.log(json);
+
     }
 
 
     return (
         <div>
+            {id > 10 && <Counter />}
             <input type='text' placeholder='enter id' value={id} onChange={(e) => setId(e.target.value)} />
             <button onClick={searchHandler} >search</button>
             {!users.length && !error && <p>Loading</p>}
 
-            {/* <ul>{users.map(user => (<li key={user.id} >{user.name}</li>))}</ul> */}
+            <ul>{users.map(user => (<li key={user.id} >{user.name}</li>))}</ul>
 
             {error && <h3>Something went wrong!!!</h3>}
         </div>
