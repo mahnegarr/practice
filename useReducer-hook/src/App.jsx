@@ -18,8 +18,6 @@ function App() {
 
   const [count, dispatch] = useReducer(reducer, 0)
 
-
-
   const increaseHandler = () => {
     dispatch("Increase")
   }
