@@ -1,5 +1,5 @@
 import { useReducer, useState } from 'react'
-const initialState = { count: 0, number: 1 }
+const initialState = { count: 0 }
 const reducer = (state, action) => {
 
   switch (action.type) {
@@ -11,8 +11,6 @@ const reducer = (state, action) => {
       return { ...state, count: state.count = 0 }
     case "IncreaseByAmount":
       return { ...state, count: state.count + action.payload }
-    case "numberIncrease":
-      return { ...state, number: state.number + 1 }
     default:
       break;
   }
@@ -21,6 +19,7 @@ const reducer = (state, action) => {
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [state2, dispatch2] = useReducer(reducer, initialState)
 
   const increaseHandler = () => {
     dispatch({ type: "Increase" })
@@ -39,9 +38,7 @@ function App() {
 
   }
 
-  const numIncreaseHandler = () => {
-    dispatch({ type: "numberIncrease" })
-  }
+
 
   return (
     <>
@@ -52,8 +49,11 @@ function App() {
         <button onClick={resetHandler}>reset</button>
         <button onClick={decreaseHandler}>down</button>
         <hr />
-        <p>{state.number}</p>
-        <button onClick={numIncreaseHandler}>Up </button>
+        <p>{state2.count}</p>
+        <button onClick={() => dispatch2({ type: "Increase" })}>up</button>
+        <button onClick={() => dispatch2({ type: "IncreaseByAmount",payload:10 })} >Increase By Amount</button>
+        <button onClick={() => dispatch2({ type: "Reset" })}>reset</button>
+        <button onClick={() => dispatch2({ type: "Decrease" })}>down</button>
       </div>
     </>
   )
