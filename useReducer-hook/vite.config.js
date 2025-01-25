@@ -1,12 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import structuredClone from 'structured-clone';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-if (typeof global.structuredClone === 'undefined') {
-    global.structuredClone = structuredClone;
-}
-
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  resolve: {
+    alias: {
+      crypto: 'crypto-browserify',
+    },
+  },
+  define: {
+    'process.env': {}, // Ensure process.env is available
+  },
+});
